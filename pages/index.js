@@ -7,8 +7,39 @@ const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
 class Index extends React.Component {
   state = { open: false };
+    
+  saveData(){
 
+      let query = {
+        query:
+        `mutation {
+        createProduct(productInput: {
+          title:"wadwa"
+          price:99
+        }){
+          price
+      }}`};
+      fetch('https://78baddf9.ngrok.io/graphql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(query),
+      })
+        .then(resData => {
+          console.log('wads');
+        
+        })
+        .catch(err => {
+          console.log('skoadks')
+          console.log(JSON.stringify(err, null, 2));
+        });
+    }
   render() {
+
+
     const emptyState = !store.get('ids');
     return (
       <Page>
@@ -41,6 +72,8 @@ class Index extends React.Component {
         ) : (
             <ResourceListWithProducts />
         )}
+                    <button onClick={()=> this.saveData()}></button>
+
       </Page>
     );
   }

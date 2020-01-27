@@ -80,50 +80,50 @@ app.prepare().then(() => {
     
 
 
-// server.use(mount('/graphql',
-//     graphqlHttp({
-//       schema: buildSchema(`
-//     type Product{
-//       title: String!
-//       price: Int!
+server.use(mount('/graphql',
+    graphqlHttp({
+      schema: buildSchema(`
+    type Product{
+      title: String!
+      price: Int!
   
-//   }
-//     input ProductInput{
-//       title: String!
-//       price: Int!
-//   }
+  }
+    input ProductInput{
+      title: String!
+      price: Int!
+  }
   
-//         type RootQuery {
-//           products: [Product!]
-//         }
-//         type RootMutation {
-//           createProduct(productInput: ProductInput): Product
-//         }
-//         schema {
-//             query: RootQuery
-//             mutation: RootMutation
-//         }
-//     `),
-//       rootValue: {
-//         createProduct: async (args, req) => {
+        type RootQuery {
+          products: [Product!]
+        }
+        type RootMutation {
+          createProduct(productInput: ProductInput): Product
+        }
+        schema {
+            query: RootQuery
+            mutation: RootMutation
+        }
+    `),
+      rootValue: {
+        createProduct: async (args, req) => {
+          console.log('RESOLVER');
+          const product = new Product({
+            title: args.productInput.title,
+            price: args.productInput.price,
+          });
+          try {
+            const result = await product.save();
 
-//           const product = new Product({
-//             title: args.productInput.title,
-//             price: args.productInput.price,
-//           });
-//           try {
-//             const result = await product.save();
-
-//             return result;
-//           } catch (err) {
-//             console.log(err);
-//             throw err;
-//           }
-//         }
-//       },
-//       graphiql: true
-//     })
-//   ));
+            return result;
+          } catch (err) {
+            console.log(err);
+            throw err;
+          }
+        }
+      },
+      graphiql: true
+    })
+  ));
 
   server.use(graphQLProxy({ version: ApiVersion.October19 }))
   server.use(verifyRequest());
@@ -134,21 +134,21 @@ app.prepare().then(() => {
     return
   });
 
-  server.use(async (args, req) => {
-    console.log('dwads');
-  const product = new Product({
-    title: "argle",
-    price: 42,
-  });
-  try {
-    const result = await product.save();
+//   server.use(async (args, req) => {
+//     console.log('dwads');
+//   const product = new Product({
+//     title: "argle",
+//     price: 42,
+//   });
+//   try {
+//     const result = await product.save();
 
-    return result;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-})
+//     return result;
+//   } catch (err) {
+//     console.log(err);
+//     throw err;
+//   }
+// })
 
   server.listen(port, () => {
     console.log(`> Ready on https://localhost:${port}`);
