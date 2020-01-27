@@ -320,7 +320,6 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
   }
 
   render() {
-    console.log(store_js__WEBPACK_IMPORTED_MODULE_4___default.a);
     const emptyState = !store_js__WEBPACK_IMPORTED_MODULE_4___default.a.get('ids');
     return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Page"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_3__["TitleBar"], {
       primaryAction: {

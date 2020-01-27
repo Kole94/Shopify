@@ -75314,7 +75314,6 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log(store_js__WEBPACK_IMPORTED_MODULE_10___default.a);
       var emptyState = !store_js__WEBPACK_IMPORTED_MODULE_10___default.a.get('ids');
       return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_8__["Page"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["TitleBar"], {
         primaryAction: {
