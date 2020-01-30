@@ -7,6 +7,11 @@ import translations from '@shopify/polaris/locales/en.json';
 import Cookies from 'js-cookie';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import { Provider as ReduxProvider } from 'react-redux';
+
+import { ConfigureStore } from '../redux/configureStore';
+
+const store = ConfigureStore();
 
 const client = new ApolloClient({
   fetchOptions: {
@@ -20,6 +25,7 @@ class MyApp extends App {
     const config = { apiKey: API_KEY, shopOrigin: Cookies.get("shopOrigin"), forceRedirect: true };
     return (
       <React.Fragment>
+        <ReduxProvider store={store}>
         <Head>
           <title>Sample App</title>
           <meta charSet="utf-8" />
@@ -31,6 +37,7 @@ class MyApp extends App {
           </ApolloProvider>
           </AppProvider>
         </Provider>
+        </ReduxProvider>
       </React.Fragment>
     );
   }
