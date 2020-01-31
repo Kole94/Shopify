@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Layout } from '@shopify/polaris';
 import { connect } from 'react-redux';
+import { Card, Caption, DescriptionList, TextContainer, TextField, DataTable, TextStyle } from '@shopify/polaris';
 
 const mapStateToProps = (state) => {
     return {
@@ -38,129 +39,106 @@ class View extends Component {
     render() {
         var q = this.state.units * this.props.Weight / 200;
         return (
-            <div className="View">
-                <div itemtype="http://schema.org/NutritionInformation" className="nf us">
+            <Card title='Nutrition Facts'>
+                <Card.Section>
+                    <TextField type="number" style={{ width: '20px' }} placeholder={this.state.units} onChange={(event) => this.setState({ units: event })} value={this.state.units}></TextField>
+                    <TextContainer>serving ({this.state.units * (this.props.Weight)}g)</TextContainer>
+                </Card.Section>
 
-                    <div className="nf-title">Nutrition Facts</div>
+                <Card.Section title='Amount Per Serving'>
+                <DescriptionList
+                        items={[
+                            {
+                                term: `Calories`,
+                                description:
+                                    `${this.props.Calories}`
+                            }]}/>
+                </Card.Section>
 
-                    <div className="nf-line">
-                        <div className="nf-serving">
-                            <input type="text" data-role="none" onChange={(event) => this.setState({ units: event.target.value })} value={this.state.units} aria-label="Change the Quantity Textbox" className="nf-modifier-field"></input>
-                            <div className="nf-item-name">
-                                <div>
-                                    serving ({this.state.units * (this.props.Weight)})
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
+                <Card.Section>
+                    <DescriptionList
+                        items={[
+                            {
+                                term: ``,
+                                description:`                                       % Daily Value*`
+                            },
+                            {
+                                term: `Total Fat ${this.props.TotalFat}`,
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: `Saturated Fat  ${this.props.SaturatedFat}`,
+                                description: `             ${this.state.units * (this.state.SaturatedF + 5 * (Math.floor(this.props.SaturatedFat) - 69))}%`,
+                                a: `asds%`
 
+                            },
+                            {
+                                term: 'Trans Fat',
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Cholesterol ',
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Sodium ',
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Total Carbohydrates\n',
+                                description: `             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Dietary Fiber ',
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Includes 0ggrams Added Sugars',
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Protein ',
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Vitamin A 50IU',
+                                description: `             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Vitamin C 50IU',
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Vitamin D 50IU',
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Calcium 460mg',
+                                description:`             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Potassium 4700mg',
+                                description: `             ${this.props.Calories}`
+                            },
+                            {
+                                term: 'Caffeine mg',
+                                description:`             ${this.props.Calories}`
+                            }
+                        ]}
+                    />
 
-                    <div className="nf-bar2"></div>
-                    <div className="nf-amount-per-serving">Amount Per Serving</div>
+                </Card.Section>
 
-                    <div className="nf-calories">
-                        <span>Calories</span>
-                        <span itemprop="calories" className="nf-pr">{q*(Math.floor(this.props.Calories))}</span>
-                    </div>
+                <Card.Section>
+                    <TextContainer>
+                        The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2000 calories a day is used for general nutrition advice.
+                        <Caption>Ingredients:</Caption>
+                        Swiss cheese, American cheese, more cheese and a burger.
+                        </TextContainer>
 
-                    <div className="nf-bar1"></div>
-                    <div className="nf-line nf-text-right">
-                        <span className="nf-highlight nf-percent-dv">%
-                            <span>Daily Value</span>*</span></div>
-                    <div className="nf-line">
-                        <span aria-hidden="true" className="nf-highlight nf-pr">75%</span>
-                        <span className="nf-highlight">Total Fat</span>
-                        <span itemprop="fatContent">
-                            <span aria-hidden="true">g</span>
-                            <span className="sr-only"> grams</span>
-                        </span>
-                    </div>
+                </Card.Section>
 
-                    <div className="nf-line nf-indent">
-                        <span aria-hidden="true" className="nf-highlight nf-pr">{this.state.units*(this.state.SaturatedF + 5 * (Math.floor(this.props.SaturatedFat) - 69))}%</span>
-                        <span>Saturated Fat</span>
-                        <span itemprop="saturatedFatContent">
-                            <span aria-hidden="true">g</span>
-                            <span className="sr-only"> grams</span>
-                        </span>
-                    </div>
-
-                    <div className="nf-line nf-indent">
-                        <span>Trans Fat</span>
-                        <span itemprop="transFatContent">
-                            <span aria-hidden="true">  {this.state.units*this.props.TransFat}g</span>
-                            <span className="sr-only"> grams</span>
-                        </span>
-                    </div>
-
-                    <div className="nf-line">
-        <span aria-hidden="true" className="nf-highlight nf-pr">{this.state.units*(3 + Math.floor((this.props.Cholesterol - 10)/3))}%</span>
-                        <span className="nf-highlight">Cholesterol</span>
-                        <span itemprop="cholesterolContent">
-        <span aria-hidden="true">{this.state.units*this.props.Cholesterol}mg</span>
-                            <span className="sr-only"> milligrams</span>
-                        </span>
-                    </div>
-                    <div className="nf-line">
-                        <span aria-hidden="true" className="nf-highlight nf-pr">{this.state.units*(33 + Math.floor((Math.floor(this.props.Sodium) - 780) / 20))}%</span>
-                        <span className="nf-highlight">Sodium</span>
-                        <span itemprop="sodiumContent">
-                            <span aria-hidden="true">{this.state.units*(Math.floor(this.props.Sodium))}mg</span>
-                            <span className="sr-only"> milligrams</span>
-                        </span>
-                    </div>
-
-                    <div className="nf-line">
-                        <span aria-hidden="true" className="nf-highlight nf-pr">{this.state.units*(3 + Math.floor((Math.floor(this.props.Carbohydrate) - 7) / 3))}%</span>
-                        <span className="nf-highlight">Total Carbohydrates</span>
-                        <span itemprop="carbohydrateContent">
-                            <span aria-hidden="true">{this.state.units*(Math.floor(this.props.Carbohydrate))}g</span>
-                            <span className="sr-only"> grams</span>
-                        </span>
-                    </div>
-                    <div className="nf-line nf-indent">
-                        <span aria-hidden="true" className="nf-highlight nf-pr">{this.state.units*(60 + (Math.floor(this.props.Fiber) - 15) * 4)}%</span>
-                        <span>Dietary Fiber</span>
-                        <span itemprop="fiberContent">
-                            <span aria-hidden="true">{this.state.units*(Math.floor(this.props.Fiber))}g</span>
-                            <span className="sr-only"> grams</span>
-                        </span></div>
-
-                    <div className="nf-line nf-indent">
-                        <span>Sugars</span>
-                        <span itemprop="sugarContent">
-                            <span aria-hidden="true">{this.state.units*(Math.floor(this.props.Sugars))}g</span>
-                            <span className="sr-only"> grams</span>
-                        </span>
-                    </div>
-                    <div className="nf-line nf-indent2"><span aria-hidden="true" className="nf-highlight nf-pr">{this.state.units*(2 * this.props.AddedSugars)}%</span>
-                        <span><span>Includes</span> <span itemprop="">{this.state.units*this.props.AddedSugars}<span aria-hidden="true">g</span><span className="sr-only"> grams</span></span>
-                            <span>Added Sugars</span></span></div> <div className="nf-line"><span className="nf-highlight">Protein</span>
-                        <span itemprop="proteinContent">
-        <span aria-hidden="true">{this.state.units*(Math.floor(this.props.Protein))}g</span><span className="sr-only"> grams</span></span></div>
-                    <div className="nf-bar2"></div> <div className="nf-vitamins"><div className="nf-vitamins">
-                        <div className="nf-vitamin-column"><span>Vitamin A</span>{50*this.props.A}<span aria-hidden="true">IU</span>
-        <span className="sr-only"> International Unit</span> <span aria-hidden="true" className="nf-pr">{this.state.units*(this.props.A)}%</span></div>
-                        <div className="nf-vitamin-column"><span>Vitamin C</span> 50<span aria-hidden="true">mg</span>
-                            <span className="sr-only"> milligrams</span> <span aria-hidden="true" className="nf-pr">83%</span></div>
-                        <div className="nf-vitamin-column"><span>Vitamin D</span> 0<span aria-hidden="true">mcg</span>
-                            <span className="sr-only"> micrograms</span> <span aria-hidden="true" className="nf-pr">0%</span></div>
-                        <div className="nf-vitamin-column"><span>Calcium</span> {this.state.units* this.props.Calcium * 10 + 110}<span aria-hidden="true">mg</span>
-                            <span className="sr-only"> milligrams</span> <span aria-hidden="true" className="nf-pr">{(this.state.units* this.props.Calcium)}%</span></div>
-                        <div className="nf-vitamin-column"><span>Iron</span>{Math.floor(this.state.units* this.props.Iron / 6)}<span aria-hidden="true">mg</span>
-                            <span className="sr-only"> milligrams</span> <span aria-hidden="true" className="nf-pr">{(this.state.units* this.props.Iron)}%</span></div>
-                        <div className="nf-vitamin-column"><span>Potassium</span> 5120<span aria-hidden="true">mg</span>
-                            <span className="sr-only"> milligrams</span> <span aria-hidden="true" className="nf-pr">{(this.state.units* this.props.Potassium)}%</span></div></div></div>
-                    <div className="nf-bar1"></div> <div><span className="nf-highlight">Caffeine</span> <span aria-hidden="true">mg</span>
-                        <span className="sr-only"> milligrams</span></div> <div className="nf-bar2"></div> <div className="nf-footnote"><span>
-                            The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2000 calories a day is used for general nutrition advice.</span>
-                        <div className="nf-ingredient-statement">
-                            <strong>Ingredients:</strong>
-                            <div>Swiss cheese, American cheese, more cheese and a burger.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </Card>
         )
     }
 }

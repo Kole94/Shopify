@@ -1,0 +1,35 @@
+[33mcommit caa7105636c942d5aa5c89757bae043c711a48b2[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Konstantin <konstantin.lijakovic@yahoo.com>
+Date:   Thu Jan 30 14:05:24 2020 +0100
+
+    shopify redux integration in process
+
+[33mcommit 3de35a0461d405f8fdbf4d74e11b55b4ab8b9592[m
+Author: Konstantin <konstantin.lijakovic@yahoo.com>
+Date:   Mon Jan 27 22:00:25 2020 +0100
+
+    front back connected!(error exist)
+
+[33mcommit 8cd352793af1c847bd8c1b95537a440ff87cf528[m
+Author: Konstantin <konstantin.lijakovic@yahoo.com>
+Date:   Mon Jan 27 21:48:04 2020 +0100
+
+    server-db req added
+
+[33mcommit de24eb1f33d0b2a7776ff3495e4e0e38b29ef57e[m
+Author: Konstantin <konstantin.lijakovic@yahoo.com>
+Date:   Sun Jan 26 17:46:05 2020 +0100
+
+    query & mutation added
+
+[33mcommit a8e0c8a2fd867eea09f4a8a726132aaf11844deb[m
+Author: Konstantin <konstantin.lijakovic@yahoo.com>
+Date:   Sat Jan 25 17:52:18 2020 +0100
+
+    first query added
+
+[33mcommit 70abc8f8ca2c6c5ccc93399192d025c215bee3bc[m
+Author: Konstantin <konstantin.lijakovic@yahoo.com>
+Date:   Sat Jan 25 17:43:43 2020 +0100
+
+    406

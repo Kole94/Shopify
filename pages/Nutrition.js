@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Layout } from '@shopify/polaris';
 import { connect } from 'react-redux';
+import { Card, DescriptionList, DataTable  } from '@shopify/polaris';
 
 const mapStateToProps = (state) => {
     return {
@@ -31,9 +32,41 @@ class Nutrition extends Component {
     state = {
         units: 1
     }
+
     render(){
+      const rows = [
+    ['Emerald Silk Gown', '$875.00', 124689, 140, '$122,500.00'],
+    ['Mauve Cashmere Scarf', '$230.00', 124533, 83, '$19,090.00'],
+    [
+      'Navy Merino Wool Blazer with khaki chinos and yellow belt',
+      '$445.00',
+      124518,
+      32,
+      '$14,240.00',
+    ],
+  ];
         return(
-<div className="Nutrition">
+<Card className="Nutrition">
+
+
+     <DataTable
+          columnContentTypes={[
+            'text',
+            'numeric',
+            'numeric',
+            'numeric',
+            'numeric',
+          ]}
+          headings={[
+            'Typical Values',
+            'Per 100g	',
+            'serving (200g)	',
+            '%*(200g)'
+          ]}
+          rows={rows}
+          totals={['', '', '', 255, '$155,830.00']}
+        />
+
     <div itemtype="http://schema.org/NutritionInformation" className="nf uk">
         <div className="nf-title">Nutrition</div> 
         <table>
@@ -88,7 +121,7 @@ class Nutrition extends Component {
                        <div className="nf-disclaimer">Disclaimer</div></td></tr></tfoot>
                        </table>
                        </div>
-                       </div>
+                       </Card>
         )
     }
 }

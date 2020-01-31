@@ -7,9 +7,8 @@ const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
 class Index extends React.Component {
   state = { open: false };
-    
-  saveData(){
 
+  saveData(){
       let query = {
         query:
         `mutation {
@@ -19,7 +18,7 @@ class Index extends React.Component {
         }){
           price
       }}`};
-      fetch('https://78baddf9.ngrok.io/graphql', {
+      fetch('https://b61cbbeb.ngrok.io/graphql', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +29,6 @@ class Index extends React.Component {
       })
         .then(resData => {
           console.log('wads');
-        
         })
         .catch(err => {
           console.log('skoadks')
@@ -62,7 +60,7 @@ class Index extends React.Component {
               heading="Select products to start"
               action={{
                 content: 'Select products',
-                onAction: () => this.setState({ open: true }),
+                onAction: () => this.setState({ open: true })
               }}
               image={img}
             >
@@ -72,7 +70,7 @@ class Index extends React.Component {
         ) : (
             <ResourceListWithProducts />
         )}
-                    <button onClick={()=> this.saveData()}></button>
+        <button onClick={()=> this.saveData()}></button>
 
       </Page>
     );

@@ -6,6 +6,7 @@ import {
     setCalcium, setIron, setPotassium
 } from '../redux/ActionCreator';
 import { TextField, FormLayout, Form } from '@shopify/polaris';
+import { bindActionCreators } from "redux";
 
 
 const mapStateToProps = (state) => {
@@ -34,7 +35,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return {
+    return bindActionCreators({
         setWeight: (event) => dispatch(setWeight(event)),
         setCalories: (event) => dispatch(setCalories(event)),
         setTotalFat: (event) => dispatch(setTotalFat(event)),
@@ -53,7 +54,7 @@ const mapDispatchToProps = (dispatch) => {
         setCalcium: (event) => dispatch(setCalcium(event)),
         setIron: (event) => dispatch(setIron(event)),
         setPotassium: (event) => dispatch(setPotassium(event))
-    }
+    }, dispatch)
 }
 
 
@@ -63,34 +64,30 @@ class Inputbox extends Component {
         super(props)
     }
 
-    componentDidMount = () => {
-        console.log('comdidmount')
-    }
-
     render() {
         return (
-            <Form className='Inputbox'>
-                <FormLayout className='inputform'>
-                    <p><label>Serving Weight</label><TextField className='inputfield' onChange={this.props.setWeight} value={this.props.Weight} type="number"></TextField></p>
-                    <p><label>Calories</label><TextField className='inputfield' onChange={this.props.setCalories} value={this.props.Calories} type="number"></TextField></p>
-                    <p><label>Total Fat</label><TextField className='inputfield' onChange={this.props.setTotalFat} value={this.props.TotalFat} type="number"></TextField></p>
-                    <p><label>Saturated Fat</label><TextField className='inputfield' onChange={this.props.setSaturatedFat} value={this.props.SaturatedFat} type="number"></TextField></p>
-                    <p><label>Trans Fat</label> <TextField className='inputfield' onChange={this.props.setTransFat} value={this.props.TransFat} type="number"></TextField></p>
-                    <p><label>Cholesterol</label> <TextField className='inputfield' onChange={this.props.setCholesterol} value={this.props.Cholesterol} type="number"></TextField></p>
-                    <p><label>Sodium</label> <TextField className='inputfield' onChange={this.props.setSodium} value={this.props.Sodium} type="number"></TextField></p>
-                    <p><label>Carbohydrate</label> <TextField className='inputfield' onChange={this.props.setCarbohydrate} value={this.props.Carbohydrate} type="number"></TextField></p>
-                    <p><label>Fiber</label> <TextField className='inputfield' onChange={this.props.setFiber} value={this.props.Fiber} type="number"></TextField></p>
-                    <p><label>Sugars</label> <TextField className='inputfield' onChange={this.props.setSugars} value={this.props.Sugars} type="number"></TextField></p>
-                    <p><label>Added Sugars</label> <TextField className='inputfield' onChange={this.props.setAddedSugars} value={this.props.AddedSugars} type="number"></TextField></p>
-                    <p><label>Protein</label> <TextField className='inputfield' onChange={this.props.setProtein} value={this.props.Protein} type="number"></TextField></p>
-                    <p><label>Vitamin A</label> <TextField className='inputfield' onChange={this.props.setA} value={this.props.A} type="number"></TextField></p>
-                    <p><label>Vitamin C</label> <TextField className='inputfield' onChange={this.props.setC} value={this.props.C} type="number"></TextField></p>
-                    <p><label>Vitamin D</label> <TextField className='inputfield' onChange={this.props.setD} value={this.props.D} type="number"></TextField></p>
-                    <p><label>Calcium</label> <TextField className='inputfield' onChange={this.props.setCalcium} value={this.props.Calcium} type="number"></TextField></p>
-                    <p><label>Iron</label> <TextField className='inputfield' onChange={this.props.setIron} value={this.props.Iron} type="number"></TextField></p>
-                    <p><label>Potassium</label> <TextField className='inputfield' onChange={this.props.setPotassium} value={this.props.Potassium} type="number"></TextField></p>
-                </FormLayout>
-            </Form>
+            <FormLayout title='Vue Nutrition Label'>
+                <FormLayout.Group>
+                    <p><label>Serving Weight</label><TextField className='inputfield' onChange={this.props.setWeight} placeholder={this.props.Weight } value={this.props.Weight} type="number"></TextField></p>
+                    <p><label>Calories</label><TextField className='inputfield' onChange={this.props.setCalories} placeholder={this.props.Calories} value={this.props.Calories} type="number"></TextField></p>
+                    <p><label>Total Fat</label><TextField className='inputfield' onChange={this.props.setTotalFat} placeholder={this.props.TotalFat} value={this.props.TotalFat} type="number"></TextField></p>
+                    <p><label>Saturated Fat</label><TextField className='inputfield' onChange={this.props.setSaturatedFat} placeholder={this.props.SaturatedFat} value={this.props.SaturatedFat} type="number"></TextField></p>
+                    <p><label>Trans Fat</label> <TextField className='inputfield' onChange={this.props.setTransFat} placeholder={this.props.TransFat} value={this.props.TransFat} type="number"></TextField></p>
+                    <p><label>Cholesterol</label> <TextField className='inputfield' onChange={this.props.setCholesterol} placeholder={this.props.Cholesterol} value={this.props.Cholesterol} type="number"></TextField></p>
+                    <p><label>Sodium</label> <TextField className='inputfield' onChange={this.props.setSodium} placeholder={this.props.Sodium} value={this.props.Sodium} type="number"></TextField></p>
+                    <p><label>Carbohydrate</label> <TextField className='inputfield' onChange={this.props.setCarbohydrate} placeholder={this.props.Carbohydrate} value={this.props.Carbohydrate} type="number"></TextField></p>
+                    <p><label>Fiber</label> <TextField className='inputfield' onChange={this.props.setFiber} placeholder={this.props.Fiber} value={this.props.Fiber} type="number"></TextField></p>
+                    <p><label>Sugars</label> <TextField className='inputfield' onChange={this.props.setSugars} placeholder={this.props.Sugars} value={this.props.Sugars} type="number"></TextField></p>
+                    <p><label>Added Sugars</label> <TextField className='inputfield' onChange={this.props.setAddedSugars} placeholder={this.props.AddedSugars} value={this.props.AddedSugars} type="number"></TextField></p>
+                    <p><label>Protein</label> <TextField className='inputfield' onChange={this.props.setProtein} placeholder={this.props.Protein} value={this.props.Protein} type="number"></TextField></p>
+                    <p><label>Vitamin A</label> <TextField className='inputfield' onChange={this.props.setA} placeholder={this.props.A} value={this.props.A} type="number"></TextField></p>
+                    <p><label>Vitamin C</label> <TextField className='inputfield' onChange={this.props.setC} placeholder={this.props.C} value={this.props.C} type="number"></TextField></p>
+                    <p><label>Vitamin D</label> <TextField className='inputfield' onChange={this.props.setD} placeholder={this.props.D} value={this.props.D} type="number"></TextField></p>
+                    <p><label>Calcium</label> <TextField className='inputfield' onChange={this.props.setCalcium} placeholder={this.props.Calcium} value={this.props.Calcium} type="number"></TextField></p>
+                    <p><label>Iron</label> <TextField className='inputfield' onChange={this.props.setIron} placeholder={this.props.Iron} value={this.props.Iron} type="number"></TextField></p>
+                    <p><label>Potassium</label> <TextField className='inputfield' onChange={this.props.setPotassium} placeholder={this.props.Potassium} value={this.props.Potassium} type="number"></TextField></p>
+                </FormLayout.Group>
+            </FormLayout>
 
         )
     }
