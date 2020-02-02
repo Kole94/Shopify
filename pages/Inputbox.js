@@ -5,8 +5,9 @@ import {
     setCarbohydrate, setFiber, setSugars, setAddedSugars, setProtein, setA, setC, setD,
     setCalcium, setIron, setPotassium
 } from '../redux/ActionCreator';
-import { TextField, FormLayout, Form } from '@shopify/polaris';
+import { TextField, FormLayout, Form, Button } from '@shopify/polaris';
 import { bindActionCreators } from "redux";
+import gql from 'graphql-tag';
 
 
 const mapStateToProps = (state) => {
@@ -57,14 +58,18 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch)
 }
 
-
+  
+  
 class Inputbox extends Component {
     
-    constructor(props) {
-        super(props)
-    }
+    
+        state = {
+            productId: null
+        };
 
     render() {
+
+        console.log(this.state.productId);
         return (
             <FormLayout title='Vue Nutrition Label'>
                 <FormLayout.Group>
@@ -87,6 +92,33 @@ class Inputbox extends Component {
                     <p><label>Iron</label> <TextField className='inputfield' onChange={this.props.setIron} placeholder={this.props.Iron} value={this.props.Iron} type="number"></TextField></p>
                     <p><label>Potassium</label> <TextField className='inputfield' onChange={this.props.setPotassium} placeholder={this.props.Potassium} value={this.props.Potassium} type="number"></TextField></p>
                 </FormLayout.Group>
+                <Mutation mutation={ADD_PRODUCTS_METAFILED}>
+                
+        {(handleSubmit, { error, data }) => {
+          const showError = error && (
+            <Banner status="critical">{error.message}</Banner>
+          );
+          const showToast = data && data.productVariantUpdate && (
+            <Toast
+              content="Sucessfully updated"
+              onDismiss={() => this.setState({ showToast: false })}
+            />
+          );
+          return (
+            <Frame>
+              <Page>
+
+                    </Form>
+                  </Layout.Section>
+                </Layout>
+              </Page>
+            </Frame>
+          );
+        }}
+      </Mutation>
+
+                <TextField onChange={() => this.setState({productId: event.target.value})}></TextField>
+                <Button onClick={()=>addMetafiled()}>Add product</Button>
             </FormLayout>
 
         )

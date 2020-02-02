@@ -28,6 +28,7 @@ const UPDATE_PRICE = gql`
       productVariant {
         id
         price
+        privateMetafields 
       }
     }
   }
@@ -102,7 +103,23 @@ class EditProduct extends React.Component {
                             onAction: () => {
                               const productVariableInput = {
                                 id: variantId,
-                                price: discount
+                                price: discount,
+                                privateMetafields: [{
+                                  key: "abc",
+                                  namespace: "name",
+                                  valueInput: {
+                                    value: "Petar",
+                                    valueType: STRING
+                                  }
+                                },
+                                {
+                                  key: "def",
+                                  namespace: "space",
+                                  valueInput: {
+                                    value: "Petrovic",
+                                    valueType: STRING
+                                  }
+                                }]
                               };
                               handleSubmit({
                                 variables: { input: productVariableInput },

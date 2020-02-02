@@ -1,16 +1,17 @@
 import { EmptyState, Layout, Page } from '@shopify/polaris';
-import { ResourcePicker, TitleBar} from '@shopify/app-bridge-react';
+import { ResourcePicker, TitleBar } from '@shopify/app-bridge-react';
 import store from 'store-js';
 import ResourceListWithProducts from '../components/ResourceList';
+import Metafields from './metafiled';
 
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
 class Index extends React.Component {
   state = { open: false };
 
-  saveData(){
-      let query = {
-        query:
+  saveData() {
+    let query = {
+      query:
         `mutation {
         createProduct(productInput: {
           title:"wadwa"
@@ -18,23 +19,23 @@ class Index extends React.Component {
         }){
           price
       }}`};
-      fetch('https://b61cbbeb.ngrok.io/graphql', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+    fetch('https://b61cbbeb.ngrok.io/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
 
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(query),
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(query),
+    })
+      .then(resData => {
+        console.log('wads');
       })
-        .then(resData => {
-          console.log('wads');
-        })
-        .catch(err => {
-          console.log('skoadks')
-          console.log(JSON.stringify(err, null, 2));
-        });
-    }
+      .catch(err => {
+        console.log('skoadks')
+        console.log(JSON.stringify(err, null, 2));
+      });
+  }
   render() {
 
 
@@ -68,9 +69,11 @@ class Index extends React.Component {
             </EmptyState>
           </Layout>
         ) : (
-            <ResourceListWithProducts />
-        )}
-        <button onClick={()=> this.saveData()}></button>
+            
+              <ResourceListWithProducts />
+            
+
+          )}
 
       </Page>
     );

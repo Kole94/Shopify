@@ -104,32 +104,41 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/date/now */ "./node_modules/@babel/runtime-corejs2/core-js/date/now.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-apollo */ "react-apollo");
-/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @shopify/polaris */ "@shopify/polaris");
-/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_shopify_polaris__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var store_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! store-js */ "store-js");
-/* harmony import */ var store_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(store_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-apollo */ "react-apollo");
+/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @shopify/polaris */ "@shopify/polaris");
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @shopify/app-bridge/actions */ "@shopify/app-bridge/actions");
+/* harmony import */ var _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @shopify/app-bridge-react */ "@shopify/app-bridge-react");
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var store_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! store-js */ "store-js");
+/* harmony import */ var store_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(store_js__WEBPACK_IMPORTED_MODULE_8__);
 
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
 
-const GET_PRODUCTS_BY_ID = graphql_tag__WEBPACK_IMPORTED_MODULE_2___default.a`
+
+
+const GET_PRODUCTS_BY_ID = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default.a`
   query getProducts($ids: [ID!]!) {
     nodes(ids: $ids) {
       ... on Product {
         title
+        vendor
         handle
         descriptionHtml
         id
-        images(first: 1) {
+        images(first: 3) {
           edges {
             node {
               originalSrc
@@ -150,14 +159,20 @@ const GET_PRODUCTS_BY_ID = graphql_tag__WEBPACK_IMPORTED_MODULE_2___default.a`
   }
 `;
 
-class ResourceListWithProducts extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
+class ResourceListWithProducts extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
   render() {
+    const app = this.context;
+
+    const redirectToProduct = () => {
+      const redirect = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_6__["Redirect"].create(app);
+      redirect.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_6__["Redirect"].Action.APP, '/edit-products');
+    };
+
     const twoWeeksFromNow = new Date(_babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_0___default()() + 12096e5).toDateString();
-    console.log(store_js__WEBPACK_IMPORTED_MODULE_5___default.a.get('ids'));
-    return __jsx(react_apollo__WEBPACK_IMPORTED_MODULE_3__["Query"], {
+    return __jsx(react_apollo__WEBPACK_IMPORTED_MODULE_4__["Query"], {
       query: GET_PRODUCTS_BY_ID,
       variables: {
-        ids: store_js__WEBPACK_IMPORTED_MODULE_5___default.a.get('ids')
+        ids: store_js__WEBPACK_IMPORTED_MODULE_8___default.a.get('ids')
       }
     }, ({
       data,
@@ -167,11 +182,41 @@ class ResourceListWithProducts extends react__WEBPACK_IMPORTED_MODULE_1___defaul
       if (loading) return __jsx("div", null, "Loading\u2026");
       if (error) return __jsx("div", null, error.message);
       console.log(data);
-      return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_4__["Card"], null, __jsx("p", null, "stuff here"));
+      return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__["Card"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__["ResourceList"], {
+        showHeader: true,
+        resourceName: {
+          singular: 'Product',
+          plural: 'Products'
+        },
+        items: data.nodes,
+        renderItem: item => {
+          const media = __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__["Thumbnail"], {
+            source: item.images.edges[0] ? item.images.edges[0].node.originalSrc : '',
+            alt: item.images.edges[0] ? item.images.edges[0].node.altText : ''
+          });
+
+          const price = item.variants.edges[0].node.price;
+          return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__["ResourceList"].Item, {
+            id: item.id,
+            media: media,
+            accessibilityLabel: `View details for ${item.title}`,
+            onClick: () => {
+              store_js__WEBPACK_IMPORTED_MODULE_8___default.a.set('item', item);
+              redirectToProduct();
+            }
+          }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__["Stack"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__["Stack"].Item, {
+            fill: true
+          }, __jsx("h3", null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__["TextStyle"], {
+            variation: "strong"
+          }, item.title))), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__["Stack"].Item, null, __jsx("p", null, "$", price)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__["Stack"].Item, null, __jsx("p", null, "Expires on ", twoWeeksFromNow, " "))));
+        }
+      }));
     });
   }
 
 }
+
+Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(ResourceListWithProducts, "contextType", _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_7__["Context"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (ResourceListWithProducts);
 
@@ -261,10 +306,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var store_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! store-js */ "store-js");
 /* harmony import */ var store_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(store_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_ResourceList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/ResourceList */ "./components/ResourceList.js");
+/* harmony import */ var _metafiled__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./metafiled */ "./pages/metafiled.js");
 
 
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
 
 
 
@@ -339,14 +386,97 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
         })
       },
       image: img
-    }, __jsx("p", null, "Select products and change their price temporarily"))) : __jsx(_components_ResourceList__WEBPACK_IMPORTED_MODULE_6__["default"], null), __jsx("button", {
-      onClick: () => this.saveData()
-    }));
+    }, __jsx("p", null, "Select products and change their price temporarily"))) : __jsx(_components_ResourceList__WEBPACK_IMPORTED_MODULE_6__["default"], null));
   }
 
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
+
+/***/ }),
+
+/***/ "./pages/metafiled.js":
+/*!****************************!*\
+  !*** ./pages/metafiled.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_1__);
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+const CREATE_METAFILED = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default.a`
+mutation productUpdate($input: ProductInput!) {
+  productUpdate(input: $input) {
+    product {
+      id
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+`;
+
+class Metafields extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  render() {
+    console.log('METAFIELDS');
+    return __jsx(Mutation, {
+      mutation: CREATE_METAFILED
+    }, (handleSubmit, {
+      error,
+      data
+    }) => {
+      const showError = error && __jsx(Banner, {
+        status: "critical"
+      }, error.message);
+
+      return __jsx(Frame, null, __jsx(PageActions, {
+        primaryAction: [{
+          content: 'Save',
+          onAction: () => {
+            const ProductInput = {
+              id: "gid://shopify/Product/4548010803335",
+              privateMetafields: [{
+                key: "abc",
+                namespace: "name",
+                valueInput: {
+                  value: "Petar",
+                  valueType: STRING
+                }
+              }, {
+                key: "def",
+                namespace: "space",
+                valueInput: {
+                  value: "Petrovic",
+                  valueType: STRING
+                }
+              }]
+            };
+            handleSubmit({
+              variables: {
+                input: ProductInput
+              }
+            });
+          }
+        }],
+        secondaryActions: [{
+          content: 'Remove discount'
+        }]
+      }));
+    });
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Metafields);
 
 /***/ }),
 
@@ -370,6 +500,17 @@ module.exports = __webpack_require__(/*! /home/kole/fullStack/candu/pages/index.
 /***/ (function(module, exports) {
 
 module.exports = require("@shopify/app-bridge-react");
+
+/***/ }),
+
+/***/ "@shopify/app-bridge/actions":
+/*!**********************************************!*\
+  !*** external "@shopify/app-bridge/actions" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@shopify/app-bridge/actions");
 
 /***/ }),
 
