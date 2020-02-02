@@ -45,6 +45,7 @@ class ResourceListWithProducts extends React.Component {
   static contextType = Context;
 
   render() {
+    console.log(store.get('ids'));
     const app = this.context;
     const redirectToProduct = () => {
       const redirect = Redirect.create(app);

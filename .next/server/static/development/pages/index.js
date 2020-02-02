@@ -161,6 +161,7 @@ const GET_PRODUCTS_BY_ID = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default.a`
 
 class ResourceListWithProducts extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
   render() {
+    console.log(store_js__WEBPACK_IMPORTED_MODULE_8___default.a.get('ids'));
     const app = this.context;
 
     const redirectToProduct = () => {

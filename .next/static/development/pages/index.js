@@ -73,6 +73,7 @@ function (_React$Component) {
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(ResourceListWithProducts, [{
     key: "render",
     value: function render() {
+      console.log(store_js__WEBPACK_IMPORTED_MODULE_14___default.a.get('ids'));
       var app = this.context;
 
       var redirectToProduct = function redirectToProduct() {

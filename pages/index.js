@@ -69,10 +69,7 @@ class Index extends React.Component {
             </EmptyState>
           </Layout>
         ) : (
-            
               <ResourceListWithProducts />
-            
-
           )}
 
       </Page>
