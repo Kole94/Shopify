@@ -47,83 +47,83 @@ app.prepare().then(() => {
 
 
   //MYSQL
-  const sequelize = new Sequelize('101', 'root', 'valkira2', {
-    host: 'localhost',
-    dialect: 'mysql'
-  });
+  // const sequelize = new Sequelize('101', 'root', 'valkira2', {
+  //   host: 'localhost',
+  //   dialect: 'mysql'
+  // });
 
-  sequelize
-    .authenticate()
-    .then( async() => {
-      console.log('Connection has been established successfully.');
-
-    
-        console.log('dwads');
-      const product = new Product({
-        title: "argle",
-        price: 42,
-      });
-      try {
-        const result = await product.save();
-  
-        return result;
-      } catch (err) {
-        console.log(err);
-        throw err;
-      }
-    
-    })
-    .catch(err => {
-      console.error('Unable to connect to the database:', err);
-    });
+  // sequelize
+  //   .authenticate()
+  //   .then( async() => {
+  //     console.log('Connection has been established successfully.');
 
     
-
-
-server.use(mount('/graphql',
-    graphqlHttp({
-      schema: buildSchema(`
-    type Product{
-      title: String!
-      price: Int!
+  //       console.log('dwads');
+  //     const product = new Product({
+  //       title: "argle",
+  //       price: 42,
+  //     });
+  //     try {
+  //       const result = await product.save();
   
-  }
-    input ProductInput{
-      title: String!
-      price: Int!
-  }
-  
-        type RootQuery {
-          products: [Product!]
-        }
-        type RootMutation {
-          createProduct(productInput: ProductInput): Product
-        }
-        schema {
-            query: RootQuery
-            mutation: RootMutation
-        }
-    `),
-      rootValue: {
-        createProduct: async (args, req) => {
-          console.log('RESOLVER');
-          const product = new Product({
-            title: args.productInput.title,
-            price: args.productInput.price,
-          });
-          try {
-            const result = await product.save();
+  //       return result;
+  //     } catch (err) {
+  //       console.log(err);
+  //       throw err;
+  //     }
+    
+  //   })
+  //   .catch(err => {
+  //     console.error('Unable to connect to the database:', err);
+  //   });
 
-            return result;
-          } catch (err) {
-            console.log(err);
-            throw err;
-          }
-        }
-      },
-      graphiql: true
-    })
-  ));
+    
+
+
+// server.use(mount('/graphql',
+//     graphqlHttp({
+//       schema: buildSchema(`
+//     type Product{
+//       title: String!
+//       price: Int!
+  
+//   }
+//     input ProductInput{
+//       title: String!
+//       price: Int!
+//   }
+  
+//         type RootQuery {
+//           products: [Product!]
+//         }
+//         type RootMutation {
+//           createProduct(productInput: ProductInput): Product
+//         }
+//         schema {
+//             query: RootQuery
+//             mutation: RootMutation
+//         }
+//     `),
+//       rootValue: {
+//         createProduct: async (args, req) => {
+//           console.log('RESOLVER');
+//           const product = new Product({
+//             title: args.productInput.title,
+//             price: args.productInput.price,
+//           });
+//           try {
+//             const result = await product.save();
+
+//             return result;
+//           } catch (err) {
+//             console.log(err);
+//             throw err;
+//           }
+//         }
+//       },
+//       graphiql: true
+//     })
+//   ));
 
   server.use(graphQLProxy({ version: ApiVersion.January20}))
   server.use(verifyRequest());
