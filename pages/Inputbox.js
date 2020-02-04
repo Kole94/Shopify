@@ -8,7 +8,7 @@ import {
 import { TextField, FormLayout, Form, Button } from '@shopify/polaris';
 import { bindActionCreators } from "redux";
 import gql from 'graphql-tag';
-
+import '../App.css'
 
 const mapStateToProps = (state) => {
     return {
@@ -71,9 +71,9 @@ class Inputbox extends Component {
 
         console.log(this.state.productId);
         return (
-            <FormLayout title='Vue Nutrition Label'>
-                <FormLayout.Group>
-                    <p><label>Serving Weight</label><TextField className='inputfield' onChange={this.props.setWeight} placeholder={this.props.Weight } value={this.props.Weight} type="number"></TextField></p>
+            <div>
+                <form>
+                    <p><label>Serving Weight</label><input className='inputfield' onChange={this.props.setWeight} placeholder={this.props.Weight } value={this.props.Weight} type="number"></input></p>
                     <p><label>Calories</label><TextField className='inputfield' onChange={this.props.setCalories} placeholder={this.props.Calories} value={this.props.Calories} type="number"></TextField></p>
                     <p><label>Total Fat</label><TextField className='inputfield' onChange={this.props.setTotalFat} placeholder={this.props.TotalFat} value={this.props.TotalFat} type="number"></TextField></p>
                     <p><label>Saturated Fat</label><TextField className='inputfield' onChange={this.props.setSaturatedFat} placeholder={this.props.SaturatedFat} value={this.props.SaturatedFat} type="number"></TextField></p>
@@ -91,36 +91,8 @@ class Inputbox extends Component {
                     <p><label>Calcium</label> <TextField className='inputfield' onChange={this.props.setCalcium} placeholder={this.props.Calcium} value={this.props.Calcium} type="number"></TextField></p>
                     <p><label>Iron</label> <TextField className='inputfield' onChange={this.props.setIron} placeholder={this.props.Iron} value={this.props.Iron} type="number"></TextField></p>
                     <p><label>Potassium</label> <TextField className='inputfield' onChange={this.props.setPotassium} placeholder={this.props.Potassium} value={this.props.Potassium} type="number"></TextField></p>
-                </FormLayout.Group>
-                <Mutation mutation={ADD_PRODUCTS_METAFILED}>
-                
-        {(handleSubmit, { error, data }) => {
-          const showError = error && (
-            <Banner status="critical">{error.message}</Banner>
-          );
-          const showToast = data && data.productVariantUpdate && (
-            <Toast
-              content="Sucessfully updated"
-              onDismiss={() => this.setState({ showToast: false })}
-            />
-          );
-          return (
-            <Frame>
-              <Page>
-
-                    </Form>
-                  </Layout.Section>
-                </Layout>
-              </Page>
-            </Frame>
-          );
-        }}
-      </Mutation>
-
-                <TextField onChange={() => this.setState({productId: event.target.value})}></TextField>
-                <Button onClick={()=>addMetafiled()}>Add product</Button>
-            </FormLayout>
-
+                </form>
+                </div>
         )
     }
 

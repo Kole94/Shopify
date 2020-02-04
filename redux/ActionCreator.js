@@ -1,6 +1,6 @@
 
 export const setWeight = (event) => {
-
+    console.log(event)
     return {
         type: 'SET_WEIGHT',
         payload: event
